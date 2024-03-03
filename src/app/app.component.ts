@@ -1,8 +1,9 @@
 import { Component, OnInit, inject } from '@angular/core';
 import { RouterOutlet } from '@angular/router';
-import { Livro } from '../livros/livro.model';
 import { LivroService } from '../livros/livro.service';
 import { CommonModule } from '@angular/common';
+import { Store } from '@ngrx/store';
+import { livroActions } from '../livros/livro.actions';
 
 @Component({
   selector: 'app-root',
@@ -12,14 +13,18 @@ import { CommonModule } from '@angular/common';
   styleUrl: './app.component.scss'
 })
 export class AppComponent implements OnInit {
-
   title = 'angular-ngrx-aula';
 
   livroService = inject(LivroService);
-  //livros: Livro[] = [];
+  store = inject(Store);
+
   livros$ = this.livroService.obterLivrosApi();
 
   ngOnInit(): void {
-    // this.livros = this.livroService.obterLivros();
+    this.store.dispatch(livroActions.carregarLivros());
   }
+
+  // ngOnInit(): void {
+  //   this.livros = this.livroService.obterLivros();
+  // }
 }
