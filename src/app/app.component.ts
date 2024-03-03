@@ -3,7 +3,8 @@ import { RouterOutlet } from '@angular/router';
 import { LivroService } from '../livros/livro.service';
 import { CommonModule } from '@angular/common';
 import { Store } from '@ngrx/store';
-import { livroActions } from '../livros/livro.actions';
+import { livroActions } from '../livros/state/livro.actions';
+import { livrosSelector } from '../livros/state/livro.selectors';
 
 @Component({
   selector: 'app-root',
@@ -18,7 +19,7 @@ export class AppComponent implements OnInit {
   livroService = inject(LivroService);
   store = inject(Store);
 
-  livros$ = this.livroService.obterLivrosApi();
+  livros$ = this.store.select(livrosSelector)
 
   ngOnInit(): void {
     this.store.dispatch(livroActions.carregarLivros());
