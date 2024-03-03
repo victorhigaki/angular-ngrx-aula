@@ -21,7 +21,7 @@ const initialState: LivroState = {
     livros: []
 }
 
-export const LivroReducer = createReducer(
+export const livroReducer = createReducer(
     initialState,
     on(livroActions.carregarLivros, (stateAtual) => {
         return {
