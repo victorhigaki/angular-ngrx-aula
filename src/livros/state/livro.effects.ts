@@ -9,6 +9,7 @@ export const buscarLivroEffect = createEffect(
         return actions$
             .pipe(
                 ofType(livroActions.carregarLivros),
+                tap(() => console.log('Passou pelo Effect')),
                 switchMap(() => livroService.obterLivrosApi()
                     .pipe(
                         map(livros => livroActions.livrosCarregadosSucesso({ livros }))

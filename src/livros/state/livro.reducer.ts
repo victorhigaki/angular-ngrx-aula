@@ -35,5 +35,13 @@ export const livroReducer = createReducer(
             livros: livroObj.livros,
             status: LivroStatus.success
         }
-    })
+    }),
+    on(
+        livroActions.adicionarLivros, (stateAtual, livro) => {
+            return {
+                ...stateAtual,
+                livros: [...stateAtual.livros, livro]
+            }
+        }
+    )
 )
