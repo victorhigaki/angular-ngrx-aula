@@ -5,7 +5,12 @@ import { routes } from './app.routes';
 import { provideStore } from '@ngrx/store';
 import { appReducers } from './app.reducers';
 import { provideEffects } from '@ngrx/effects';
+import { buscarLivroEffect } from '../livros/state/livro.effects';
 
 export const appConfig: ApplicationConfig = {
-  providers: [provideRouter(routes), provideStore(appReducers), provideEffects()]
+  providers: [
+    provideRouter(routes),
+    provideStore(appReducers),
+    provideEffects({ buscarLivros: buscarLivroEffect })
+  ]
 };
